@@ -13,8 +13,8 @@ if (isset($_POST['form_submit'])){
     $fname = test_input($_POST['fname']);
     $lname = test_input($_POST['lname']);
     //tables
-    $users_table = $configs['dbt_users'];
-    $user_profiles_table = $configs['dbt_user_profiles'];
+    $teachers_table = $configs['dbt_teachers'];
+    $teacher_profiles_table = $configs['dbt_teacher_profiles'];
 
     //ERROR CHECKING
     $continue = true;
@@ -65,7 +65,7 @@ if (isset($_POST['form_submit'])){
         if (!$mysqli->connect_error) {
 
             //check if email exists
-            $qry="SELECT * FROM $users_table WHERE email='$email' LIMIT 1";
+            $qry="SELECT * FROM $teachers_table WHERE email='$email' LIMIT 1";
             $result = $mysqli->query($qry);
 
             if ($result){
@@ -85,22 +85,22 @@ if (isset($_POST['form_submit'])){
                 $password_hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
 
                 // create user
-                $record = "INSERT INTO $users_table (email, password) VALUES ('$email', '$password_hash')";
+                $record = "INSERT INTO $teachers_table (email, password) VALUES ('$email', '$password_hash')";
                 if ($mysqli->query($record) === TRUE) {
                     //echo "Sukurtas vartotojas <br>";
 
                     // create user profile
-                    $record="SELECT id FROM $users_table WHERE email='$email' LIMIT 1";
+                    $record="SELECT id FROM $teachers_table WHERE email='$email' LIMIT 1";
                     $result = $mysqli->query($record);
 
                     //$row[0] yra id
                     $row = mysqli_fetch_row($result);
-                    $record = "INSERT INTO $user_profiles_table (user_id, first_name, last_name) VALUES ('$row[0]', '$fname', '$lname')";
+                    $record = "INSERT INTO $teacher_profiles_table (teacher_id, first_name, last_name) VALUES ('$row[0]', '$fname', '$lname')";
                     if ($mysqli->query($record) === TRUE) {
                         echo "Sukurtas vartotojo profilis <br>";
                     } else {
                         // IF FAILED TO CREATE USER_PROFILE REMOVE RECORD FROM USER TABLE
-                        $record = "DELETE FROM $users_table WHERE email = '$email'";
+                        $record = "DELETE FROM $teachers_table WHERE email = '$email'";
                         $mysqli->query($record);
                         die("Could not create user profile");
                     }
