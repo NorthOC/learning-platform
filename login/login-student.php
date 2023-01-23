@@ -4,7 +4,7 @@
  
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    //header("location: welcome.php");
+    header("location: ../dashboard.php");
     echo "Welcome!";
     exit;
 }
@@ -19,71 +19,82 @@ $email_err = $password_err = $login_err = "";
 $emailErr = $passErr = "";
 
 
-// Include config file
-$config = include($_SERVER["DOCUMENT_ROOT"]."/teensteaching/config.php");
-
-
 if($_SERVER["REQUEST_METHOD"] == "POST"){
    
 // Define variables and initialize with empty values
+
+    // Include config file
+    $config = include($_SERVER["DOCUMENT_ROOT"]."/teensteaching/config.php");
     
     $email = test_input($_POST["email"]);
     $password = test_input($_POST["password"]);
 
-        //ERROR CHECKING
-        $continue = true;
-        //email errors
-        if (empty($email)){
+    if ($_POST["type"] == 'student'){
+        $table = $config['dbt_users'];
+        $session_type = 'student';
+    } else {
+        $table = $config['dbt_teachers'];
+        $session_type = 'teacher';
+    }
+
+    //ERROR CHECKING
+    $continue = true;
+    //email errors
+    if (empty($email)){
+        $continue = false;
+        $emailErr = 'Email field is empty.';
+        
+    } else {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $continue = false;
-            $emailErr = 'Email field is empty.';
-            
-        } else {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $continue = false;
-                $emailErr = "Invalid email format. Email format: example@example.xyz";
-                }
-            
-        };
-    
-        //pass errors
-        if (empty($password)){
-            $continue = false;
-            $passErr = 'Password field is empty.';
-        } else {
-            if (strlen($password) < 6){
-                $continue = false;
-                $passErr = 'Password must be at least 6 characters';
+            $emailErr = "Invalid email format. Email format: example@example.xyz";
             }
-        };
+        
+    };
 
-        if($continue === true) {
-            $db = new mysqli ($config['db_host'], $config['db_username'], $config['db_password'], $config['db_database']);
-
-            if (!$db->connect_error) {
-
-                //check if email exists
-                $qry="SELECT email, password FROM Users WHERE email='$email' LIMIT 1";
-                $result = $db->query($qry);
-                if($result){
-                    if(!(mysqli_num_rows($result) > 0)){
-                        $emailErr = "Tokio pašto mūsų sistemoje nėra";
-                    }
-                    else{
-                        $row = mysqli_fetch_row($result);
-                    $isPassword = password_verify($password,$row[1]);
-                    if($isPassword==true){
-                        session_start();
-                        $_SESSION["email"] = "$row[0]";
-                        echo "Esate prisijungęs";
-                    }
-                    else{
-                        $passErr = "slaptažodis yra neteisingas";
-                    }
-                    }
-                    
-                }
-
+    //pass errors
+    if (empty($password)){
+        $continue = false;
+        $passErr = 'Password field is empty.';
+    } else {
+        if (strlen($password) < 6){
+            $continue = false;
+            $passErr = 'Password must be at least 6 characters';
         }
+    };
+
+    if($continue === true) {
+        $db = new mysqli ($config['db_host'], $config['db_username'], $config['db_password'], $config['db_database']);
+
+        if (!$db->connect_error) {
+
+            //check if email exists
+            $qry="SELECT id, email, password FROM $table WHERE email='$email' LIMIT 1";
+            $result = $db->query($qry);
+            if($result){
+                if(!(mysqli_num_rows($result) > 0)){
+                    $emailErr = "Tokio pašto mūsų sistemoje nėra";
+                }
+                else{
+                    $row = mysqli_fetch_row($result);
+                $isPassword = password_verify($password,$row[2]);
+                if($isPassword==true){
+                    session_start();
+                    $_SESSION["id"] = "$row[0]";
+                    $_SESSION["email"] = "$row[1]";
+                    $_SESSION["type"] = $session_type;
+                    header("Location: ../dashboard.php");
+                    die();
+                    //echo "Esate prisijungęs";
+                }
+                else{
+                    $passErr = "slaptažodis yra neteisingas";
+                }
+                }
+                
+            }
+
+    }
 }
 
 }
@@ -123,6 +134,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
                 <span class="error"><?php echo $passErr;?></span>
+            </div>
+            <div class="form-group">
+                <label>Login as: </label>
+                <select name="type" id="">
+                    <option value="student" selected>Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" name="submit" class="btn btn-primary" value="Login">
