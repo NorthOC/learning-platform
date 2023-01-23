@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="post" id="form">
+        <button onclick="createBlock()" id="new-block" type="button">New lesson</button>
+    </form>
+
+    <script>
+        function createBlock() {
+            const newNode = document.createElement("div");
+            const title = document.createElement("label");
+            title.innerHTML = "Lesson Title:";
+            const title_input = document.createElement("input");
+            const desc = document.createElement("label");
+            desc.innerHTML = "Lesson Description:";
+            const desc_input = document.createElement("input");
+            const link = document.createElement("label");
+            link.innerHTML = "Lesson Video";
+            const link_desc = document.createElement("input");
+
+            newNode.appendChild(title);
+            newNode.appendChild(title_input);
+            newNode.appendChild(desc);
+            newNode.appendChild(desc_input);
+            newNode.appendChild(link);
+            newNode.appendChild(link_desc);
+            form = document.getElementById("form");
+            btn = document.getElementById("new-block");
+            form.insertBefore(newNode, btn);
+
+        }
+    </script>
+</body>
+</html>

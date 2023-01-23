@@ -109,13 +109,6 @@ CREATE TABLE `Teachers` (
   `credit` decimal(6,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `Teachers`
---
-
-INSERT INTO `Teachers` (`id`, `email`, `password`, `credit`) VALUES
-(2, 'rev.denisas@gmail.com', '$2y$12$LWnd1W6b7P.50z8jhKunMeGslJfkC50VmE426dqgqigzrIJzIPQdW', '0.00');
-
 -- --------------------------------------------------------
 
 --
@@ -130,13 +123,6 @@ CREATE TABLE `Teacher_profiles` (
   `avatar` varchar(500) DEFAULT NULL,
   `bio` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `Teacher_profiles`
---
-
-INSERT INTO `Teacher_profiles` (`id`, `teacher_id`, `first_name`, `last_name`, `avatar`, `bio`) VALUES
-(1, 2, 'denis', 'lisnov', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -177,13 +163,6 @@ CREATE TABLE `Users` (
   `credit` decimal(6,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `Users`
---
-
-INSERT INTO `Users` (`id`, `email`, `password`, `credit`) VALUES
-(6, 'rev.denisas@gmail.com', '$2y$12$RB6/TOUNZJmy3kCcwMLsTewxDZsC9gRqlJhE6vYBo/Zu5OCWaG.ji', '0.00');
-
 -- --------------------------------------------------------
 
 --
@@ -198,13 +177,6 @@ CREATE TABLE `User_profiles` (
   `avatar` varchar(500) DEFAULT NULL,
   `bio` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `User_profiles`
---
-
-INSERT INTO `User_profiles` (`id`, `user_id`, `first_name`, `last_name`, `avatar`, `bio`) VALUES
-(4, 6, 'denis', 'mananas', NULL, NULL);
 
 -- --------------------------------------------------------
 
