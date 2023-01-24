@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 20, 2023 at 10:31 AM
+-- Generation Time: Jan 24, 2023 at 10:53 AM
 -- Server version: 10.5.18-MariaDB-0+deb11u1
 -- PHP Version: 7.4.33
 
@@ -24,19 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Classroom_lessons`
---
-
-CREATE TABLE `Classroom_lessons` (
-  `id` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  `lesson_count` int(11) NOT NULL,
-  `html_blob` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `Courses`
 --
 
@@ -45,13 +32,22 @@ CREATE TABLE `Courses` (
   `teacher_id` int(11) NOT NULL,
   `course_subject` varchar(250) NOT NULL,
   `course_type` varchar(250) NOT NULL,
-  `course_difficulty` int(1) NOT NULL,
+  `course_difficulty` varchar(250) NOT NULL,
   `course_name` varchar(250) NOT NULL,
   `course_description` text DEFAULT NULL,
   `course_intro_video` varchar(500) DEFAULT NULL,
   `course_price` decimal(6,2) NOT NULL DEFAULT 0.00,
+  `json_blob` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`json_blob`)),
   `creation_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Courses`
+--
+
+INSERT INTO `Courses` (`id`, `teacher_id`, `course_subject`, `course_type`, `course_difficulty`, `course_name`, `course_description`, `course_intro_video`, `course_price`, `json_blob`, `creation_date`) VALUES
+(1, 2, 'digital-drawing', 'video', 'advanced', 'pasaulis', NULL, NULL, '5.55', NULL, '2023-01-24'),
+(2, 2, 'photography', 'live', 'beginner', 'planeta', NULL, NULL, '5.50', NULL, '2023-01-24');
 
 -- --------------------------------------------------------
 
@@ -66,19 +62,6 @@ CREATE TABLE `Discounts` (
   `code` varchar(100) NOT NULL,
   `percentage` int(11) NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Live_lessons`
---
-
-CREATE TABLE `Live_lessons` (
-  `id` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  `lesson_count` int(11) NOT NULL,
-  `html_blob` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -109,6 +92,13 @@ CREATE TABLE `Teachers` (
   `credit` decimal(6,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `Teachers`
+--
+
+INSERT INTO `Teachers` (`id`, `email`, `password`, `credit`) VALUES
+(2, 'rev.denisas@gmail.com', '$2y$12$LWnd1W6b7P.50z8jhKunMeGslJfkC50VmE426dqgqigzrIJzIPQdW', '0.00');
+
 -- --------------------------------------------------------
 
 --
@@ -123,6 +113,13 @@ CREATE TABLE `Teacher_profiles` (
   `avatar` varchar(500) DEFAULT NULL,
   `bio` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Teacher_profiles`
+--
+
+INSERT INTO `Teacher_profiles` (`id`, `teacher_id`, `first_name`, `last_name`, `avatar`, `bio`) VALUES
+(1, 2, 'denis', 'lisnov', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -140,19 +137,6 @@ CREATE TABLE `Teacher_ratings` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Theory_lessons`
---
-
-CREATE TABLE `Theory_lessons` (
-  `id` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  `lesson_count` int(11) NOT NULL,
-  `html_blob` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `Users`
 --
 
@@ -162,6 +146,13 @@ CREATE TABLE `Users` (
   `password` varchar(255) NOT NULL,
   `credit` decimal(6,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Users`
+--
+
+INSERT INTO `Users` (`id`, `email`, `password`, `credit`) VALUES
+(6, 'rev.denisas@gmail.com', '$2y$12$RB6/TOUNZJmy3kCcwMLsTewxDZsC9gRqlJhE6vYBo/Zu5OCWaG.ji', '0.00');
 
 -- --------------------------------------------------------
 
@@ -178,29 +169,16 @@ CREATE TABLE `User_profiles` (
   `bio` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `Video_lessons`
+-- Dumping data for table `User_profiles`
 --
 
-CREATE TABLE `Video_lessons` (
-  `id` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  `lesson_count` int(11) NOT NULL,
-  `html_blob` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `User_profiles` (`id`, `user_id`, `first_name`, `last_name`, `avatar`, `bio`) VALUES
+(4, 6, 'denis', 'mananas', NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `Classroom_lessons`
---
-ALTER TABLE `Classroom_lessons`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `course_to_classroom` (`course_id`);
 
 --
 -- Indexes for table `Courses`
@@ -216,13 +194,6 @@ ALTER TABLE `Discounts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `teacher_to_discount` (`teacher_id`),
   ADD KEY `course_to_discount` (`course_id`);
-
---
--- Indexes for table `Live_lessons`
---
-ALTER TABLE `Live_lessons`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `course_to_live` (`course_id`);
 
 --
 -- Indexes for table `Purchased_courses`
@@ -256,13 +227,6 @@ ALTER TABLE `Teacher_ratings`
   ADD KEY `teacher_to_ratings` (`teacher_id`);
 
 --
--- Indexes for table `Theory_lessons`
---
-ALTER TABLE `Theory_lessons`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `theory_to_course` (`course_id`);
-
---
 -- Indexes for table `Users`
 --
 ALTER TABLE `Users`
@@ -277,13 +241,6 @@ ALTER TABLE `User_profiles`
   ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `Video_lessons`
---
-ALTER TABLE `Video_lessons`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `video_to_course` (`course_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -291,18 +248,12 @@ ALTER TABLE `Video_lessons`
 -- AUTO_INCREMENT for table `Courses`
 --
 ALTER TABLE `Courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `Discounts`
 --
 ALTER TABLE `Discounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `Live_lessons`
---
-ALTER TABLE `Live_lessons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -330,12 +281,6 @@ ALTER TABLE `Teacher_ratings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `Theory_lessons`
---
-ALTER TABLE `Theory_lessons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
@@ -348,20 +293,8 @@ ALTER TABLE `User_profiles`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `Video_lessons`
---
-ALTER TABLE `Video_lessons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `Classroom_lessons`
---
-ALTER TABLE `Classroom_lessons`
-  ADD CONSTRAINT `course_to_classroom` FOREIGN KEY (`course_id`) REFERENCES `Courses` (`id`);
 
 --
 -- Constraints for table `Courses`
@@ -375,12 +308,6 @@ ALTER TABLE `Courses`
 ALTER TABLE `Discounts`
   ADD CONSTRAINT `course_to_discount` FOREIGN KEY (`course_id`) REFERENCES `Courses` (`id`),
   ADD CONSTRAINT `teacher_to_discount` FOREIGN KEY (`teacher_id`) REFERENCES `Courses` (`teacher_id`);
-
---
--- Constraints for table `Live_lessons`
---
-ALTER TABLE `Live_lessons`
-  ADD CONSTRAINT `course_to_live` FOREIGN KEY (`course_id`) REFERENCES `Courses` (`id`);
 
 --
 -- Constraints for table `Purchased_courses`
@@ -403,22 +330,10 @@ ALTER TABLE `Teacher_ratings`
   ADD CONSTRAINT `teacher_to_ratings` FOREIGN KEY (`teacher_id`) REFERENCES `Teachers` (`id`);
 
 --
--- Constraints for table `Theory_lessons`
---
-ALTER TABLE `Theory_lessons`
-  ADD CONSTRAINT `theory_to_course` FOREIGN KEY (`course_id`) REFERENCES `Courses` (`id`);
-
---
 -- Constraints for table `User_profiles`
 --
 ALTER TABLE `User_profiles`
   ADD CONSTRAINT `user_to_user_profile` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
-
---
--- Constraints for table `Video_lessons`
---
-ALTER TABLE `Video_lessons`
-  ADD CONSTRAINT `video_to_course` FOREIGN KEY (`course_id`) REFERENCES `Courses` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
