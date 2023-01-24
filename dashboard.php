@@ -69,6 +69,6 @@ else {
     <p>Type: <?php echo $type; ?></p>
     <p>Avatar: <img src="<?php echo $avatar; ?>" alt=""></p>
     <p>Bio: <?php echo $bio; ?></p>
-    <a href="./course/new"></a>
+    <a href="./course/new.php">Add new course</a>
 </body>
 </html>

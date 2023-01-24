@@ -1,3 +1,90 @@
+<?php
+session_start();
+ if (!isset($_SESSION['email'])) {
+     header("Location: login/login-student.php");
+     die();
+ }
+ if ($_SESSION["type"] == "student") {
+     header("Location: ../dashboard.php");
+     die();
+ }
+
+$titleErr = $subjectErr = $typeErr = $priceErr = '';
+
+//POST 
+if (isset($_POST['submit-form'])){
+
+    $config = include($_SERVER["DOCUMENT_ROOT"]."/teensteaching/config.php");
+    $type = $_SESSION['type'];
+    $id = $_SESSION['id'];
+
+    $course_title = test_input($_POST['title']);
+    $course_subject = test_input($_POST['course_subject']);
+    $course_type = test_input($_POST['course_type']);
+    $course_difficulty = test_input($_POST['course_difficulty']);
+    $course_price = test_input($_POST['price']);
+
+    //errs
+    $continue = true;
+
+    if (empty($course_title)){
+        $titleErr = "The title of the course should be set";
+        $continue = false;
+    }
+    if (empty($course_subject)){
+        $subjectErr = "Please choose a subject";
+        $continue = false;
+    }
+    if (empty($course_type)){
+        $typeErr = "Please choose a proper lesson type";
+        $continue = false;
+    }
+    if (empty($course_difficulty)){
+        $diffErr = "Please select a proper difficulty";
+        $continue = false;
+    }
+    if(empty($course_price)){
+        $priceErr = "Please select a proper difficulty";
+        $continue = false;
+    }
+
+
+    if ($continue){
+        //db connection
+        $table = $config['dbt_courses'];
+
+        $mysqli = new mysqli ($config['db_host'], $config['db_username'], $config['db_password'], $config['db_database']);
+
+
+        if (!$mysqli->connect_error) {
+
+            //grab user profile
+            $record = "INSERT INTO $table (teacher_id, course_subject, course_type, course_difficulty, course_name, course_price) VALUES ('$id', '$course_subject', '$course_type', '$course_difficulty', '$course_title', '$course_price')";
+            $result = $mysqli->query($record);
+            //echo "Selecting";
+            if ($result){
+                //echo "Result";
+                $last_id = $mysqli->insert_id;
+                header("Location: ../lesson/lesson.php?course_id=".$last_id);
+                exit();
+
+            } else {
+                die('Error: ' . $mysqli->connect_error);
+                }
+        } else {
+            die("Connect error: " . $mysqli->connect_error);
+        }
+    }
+}
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +94,10 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
         <label for="title">Course title:</label>
-        <input type="text" name="title">
+        <input type="text" name="title" required>
+
         <label for="subject" name="subject">Subject:</label>
         <select name="course_subject" id="subject_select">
             <option value="" disabled>Art</option>
@@ -61,6 +149,10 @@
             <option value="advanced">Advanced</option>
             <option value="masterclass">Masterclass</option>
         </select>
+
+        <label for="price">Course price (€): </label>
+        <input type="number" name="price" placeholder="5.5" min="1" step="any"/>
+        <button type="submit" name="submit-form">Create course</button>
     </form>
 </body>
 </html>
