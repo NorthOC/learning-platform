@@ -74,9 +74,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $isPassword = password_verify($password,$row[2]);
                 if($isPassword==true){
                     session_start();
-                    $_SESSION["id"] = "$row[0]";
-                    $_SESSION["email"] = "$row[1]";
-                    $_SESSION["type"] = $session_type;
+                    $_SESSION["id"] = "$row[0]"; // id
+                    $_SESSION["email"] = "$row[1]"; // email
+                    $_SESSION["type"] = $session_type; // teacher or student
                     header("Location: ../dashboard.php");
                     die();
                     //echo "Esate prisijungęs";
@@ -100,15 +100,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
+<link rel="stylesheet" href="../static/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css">
 </head>
 <body>
     <div class="wrapper">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
+        <h1>Login</h1>
+        <?php if (!isset($_GET['status'])) {
+            echo "<p>Please fill in your credentials to login.</p>";
+        } else {
+            echo "<p>Registration successful! You can now login using your crendentials.</p>";
+        }?>
 
         <?php 
         if(!empty($login_err)){

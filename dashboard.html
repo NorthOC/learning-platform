@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-color">
+            <div class="flex">
+                <a href="#"class="burger" href="javascript:void(0);" onclick="myFunction()"><i id="burger" class="fa-solid fa-bars fa-2x fa-fw"></i></a>
+                <a href="#"><img src="../static/images/icon2.png" alt=""></a>
+            </div>
+            <a href="#" class="sign-in">Log out</a>
+        </div>
+            <div id="navLinks">
+                <a href="#news"><i class="fas fa-home fa-2x fa-fw"></i> <p>Home</p></a>
+                <a href="#contact"><i class="fa-solid fa-atom fa-2x fa-fw"></i> <p>Subjects</p></a>
+                <a href="#"><i class="fa-solid fa-book-open fa-2x fa-fw"></i> <p>Lessons</p></a>
+                <a href="#about"><i class="fa-solid fa-gear fa-2x fa-fw"></i> <p>Settings</p></a>
+                <a href="#"><i class="fa-regular fa-face-smile fa-2x fa-fw"></i> <p>About us</p></a>
+        </div>
+        <script>
+            function myFunction() {
+                var burger = document.getElementById("burger");
+                var x = document.getElementById("navLinks");
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                    burger.className = "fa-solid fa-bars fa-2x fa-fw";
+                } else {
+                    x.style.display = "block";
+                    burger.className = "fa fa-times fa-2x fa-fw";
+                }
+            } 
+        </script>
+    </nav>
+    <h1>Dashboard</h1>
+    <div class="profile">
+
+        <div class="f-row">
+            <img src="./static/images/default-avatar.png" alt="">
+            <div class="f-col">
+                <div>
+                    <h2 class="name">Denis Lisunov</h2>
+                    <p class="type">student</p>
+                </div>
+                <div class="bio">
+                    <hr>
+                    <p>Some description here that is long enough to test. I try to be amazing at what I do and teaching helps me afford weekly pizzas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile">
+        <h2>My courses</h2>
+        <hr>
+        <a href='#' class="course-link">
+            <div class="course-card">
+                <h3>1. Javascript course</h3>
+                <p>subject</p>
+                <p>Study</p>
+            </div>
+        </a>
+        <a href='#' class="course-link">
+            <div class="course-card">
+                <h3>2. C++ advanced course</h3>
+                <p>subject</p>
+                <p>Study</p>
+            </div>
+        </a>
+        <a href='#' class="course-link">
+            <div class="course-card">
+                <h3>3. Ancient art of cooking with lard | 5 STARS 100 REVIEWS</h3>
+                <p>Mathematics</p>
+                <p>Difficulty</p>
+            </div>
+        </a>
+        <a href="">Add new course</a>
+    </div>
+    <footer>
+        <p>Copyright © TeensTeaching 2023</p>
+    </footer>
+</body>
+</html>

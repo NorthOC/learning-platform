@@ -137,27 +137,38 @@ function test_input($data) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/style.css">
+    <link rel="stylesheet" href="../../fontawesome/fontawesome-free-6.2.1-web/css/all.css">
+    <link rel="stylesheet" href="../../fontawesome/fontawesome-free-6.2.1-web/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>Register as a learner</h1>
+    <h1>Register as a teacher</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-        <label for="fname">First Name</label>
-        <input type="text" name="fname" id="fname" value="<?php if (isset($fname)) {
-            echo $fname;}; ?>">
-        <span class="error"><?php echo $fnameErr;?></span>
-        <label for="lname">Last Name</label>
-        <input type="text" name="lname" id="lname" value="<?php if (isset($lname)) {
-            echo $lname;}; ?>">
-        <span class="error"><?php echo $lnameErr;?></span>
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="<?php if (isset($email)) {
-            echo $email;}; ?>">
-        <span class="error"><?php echo $emailErr;?></span>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <span class="error"><?php echo $passErr;?></span>
-        <button type="submit" name="form_submit">Register</button>
+    <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" class='form-control'name="fname" id="fname" value="<?php if (isset($fname)) {
+                echo $fname;}; ?>">
+            <span class="error"><?php echo $fnameErr;?></span>
+        </div>
+        <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" class='form-control'name="lname" id="lname" value="<?php if (isset($lname)) {
+                echo $lname;}; ?>">
+            <span class="error"><?php echo $lnameErr;?></span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class='form-control'name="email" id="email" value="<?php if (isset($email)) {
+                echo $email;}; ?>">
+            <span class="error"><?php echo $emailErr;?></span>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class='form-control'name="password" id="password">
+            <span class="error"><?php echo $passErr;?></span>
+        </div>
+        <button type="submit" class='btn btn-primary'name="form_submit">Register</button>
     </form>
 </body>
 </html>
