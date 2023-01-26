@@ -18,7 +18,7 @@ $titleErr = $descriptionErr = $linkErr = "";
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $course_id = $_POST['id'];
+  $course_id = $_POST['id'];
   $json = $_POST["json"];
   $decoded_info = json_decode($json,true);
 //  print_r($decoded_info);
@@ -89,7 +89,7 @@ if($continue){
 
 $sql = "UPDATE Courses SET json_blob = '$json',course_name = '$title',course_description = '$description',course_price = '$price' WHERE id = '$course_id'";
 if($db->query($sql) === TRUE){
-    echo "Record updated successfully";
+    //echo "Record updated successfully";
     $qqry = "SELECT * FROM Courses WHERE id = '$course_id'";
     $result = $db->query($qqry);
     if($result){
@@ -102,7 +102,7 @@ if($db->query($sql) === TRUE){
         $des = $row[6];
         $price = $row[8];
         $blob = $row[9];
-        echo $blob;
+        //echo $blob;
         $decoded_blob = json_decode($blob,true);
     
 }
@@ -137,7 +137,7 @@ else{
         $des = $row[6];
         $price = $row[8];
         $blob = $row[9];
-        echo $blob;
+       // echo $blob;
         $decoded_blob = json_decode($blob,true);
     
 }
