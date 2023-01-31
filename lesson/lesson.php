@@ -240,8 +240,8 @@ $db->close();
         tempjson['link'] = link[0].value;
         json[x] = tempjson;
         //console.log(title[0].value);
-       // console.log(desc[0].value);
-       // console.log(link[0].value);
+        // console.log(desc[0].value);
+        // console.log(link[0].value);
 }
         inpt = document.getElementById("json");
         inpt.value = JSON.stringify(json);

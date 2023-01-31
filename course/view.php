@@ -62,7 +62,7 @@ td{
     foreach($result as $item){
         $t_id = $item['teacher_id'];
         $qry = "SELECT first_name, last_name FROM Teacher_profiles WHERE teacher_id = '$t_id' LIMIT 1";
-        $r = $db->query($qry);
+        $r = $db->query($qry); 
     if($r){
         if(!(mysqli_num_rows($r) > 0)){
             //$info_err = "There is no information";
