@@ -9,7 +9,7 @@
         <div id="navLinks">
             <a href="#news"><i class="fas fa-home fa-2x fa-fw"></i> <p>Home</p></a>
             <a href="#contact"><i class="fa-solid fa-atom fa-2x fa-fw"></i> <p>Subjects</p></a>
-            <a href="#"><i class="fa-solid fa-book-open fa-2x fa-fw"></i> <p>Lessons</p></a>
+            <a href="#"><i class="fa-solid fa-book-open fa-2x fa-fw"></i> <p>Courses</p></a>
             <a href="#about"><i class="fa-solid fa-gear fa-2x fa-fw"></i> <p>Settings</p></a>
             <a href="#"><i class="fa-regular fa-face-smile fa-2x fa-fw"></i> <p>About us</p></a>
     </div>

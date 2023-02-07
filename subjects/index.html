@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css">
+    <title>List of all courses</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-color">
+            <div class="flex">
+                <a href="#"class="burger" href="javascript:void(0);" onclick="myFunction()"><i id="burger" class="fa-solid fa-bars fa-2x fa-fw"></i></a>
+                <a href="#"><img src="../static/images/icon2.png" alt=""></a>
+            </div>
+            <a href="#" class="sign-in">Sign in</a>
+        </div>
+            <div id="navLinks">
+                <a href="#news"><i class="fas fa-home fa-2x fa-fw"></i> <p>Home</p></a>
+                <a href="#contact"><i class="fa-solid fa-atom fa-2x fa-fw"></i> <p>Subjects</p></a>
+                <a href="#"><i class="fa-solid fa-book-open fa-2x fa-fw"></i> <p>Lessons</p></a>
+                <a href="#about"><i class="fa-solid fa-gear fa-2x fa-fw"></i> <p>Settings</p></a>
+                <a href="#"><i class="fa-regular fa-face-smile fa-2x fa-fw"></i> <p>About us</p></a>
+        </div>
+        <script>
+            function myFunction() {
+                var burger = document.getElementById("burger");
+                var x = document.getElementById("navLinks");
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                    burger.className = "fa-solid fa-bars fa-2x fa-fw";
+                } else {
+                    x.style.display = "block";
+                    burger.className = "fa fa-times fa-2x fa-fw";
+                }
+            } 
+        </script>
+    </nav>
+    <h1>Subjects</h1>
+<div class="profile" id="courses">
+    <div id="tag-cloud">
+        <p class="photography">Photography (0)</p>
+        <p class="videography">Videography</p>
+        <p class="music">Music</p>
+        <p class="digital-art">Digital art</p>
+        <p class="drawing">Drawing</p>
+        <p class="painting">Painting</p>
+        <p class="writing">Writing</p>
+        <p class="physics">Physics</p>
+        <p class="math">Math</p>
+        <p class="biology">Biology</p>
+        <p class="programming">Programming</p>
+        <p class="chemistry">Chemistry</p>
+        <p class="engineering">Engineering</p>
+        <p class="electronics">Electronics</p>
+        <p class="medicine">Medicine</p>
+        <p class="history">History</p>
+        <p class="psychology">Psychology</p>
+        <p class="philosophy">Philosophy</p>
+        <p class="economics">Economics</p>
+        <p class="entrepreneurship">Entrepreneurship</p>
+        <p class="marketing">Marketing</p>
+        <p class="sports">Sports</p>
+        <p class="nutrition">Nutrition</p>
+        <p class="language-learning">Language learning</p>
+        <p class="social-skills">Social skills</p>
+        <p class="other">Other</p>
+    </div>
+    <script>
+        tags = document.getElementById('tag-cloud');
+        for (let x of Array.from(tags.children)) {
+            console.log(x.className);
+        }
+    </script>
+</div>
+</body>
+</html>

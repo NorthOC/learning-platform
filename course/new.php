@@ -102,9 +102,9 @@ function test_input($data) {
         <select name="course_subject" id="subject_select">
             <option value="" disabled>Art</option>
             <option value="photography">Photography</option>
-            <option value="Videography">Videography</option>
+            <option value="videography">Videography</option>
             <option value="music">Music</option>
-            <option value="digital-drawing">Digital art</option>
+            <option value="digital-art">Digital art</option>
             <option value="drawing">Drawing</option>
             <option value="painting">Painting</option>
             <option value="writing">Writing</option>
