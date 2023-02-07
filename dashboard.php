@@ -71,11 +71,57 @@ else {
     <title>Document</title>
 </head>
 <body>
-    <p>Name: <?php echo $fname." ".$lname; ?></p>
-    <p>Type: <?php echo $type; ?></p>
-    <p>Avatar: <img src="<?php echo $avatar; ?>" alt=""></p>
-    <p>Bio: <?php echo $bio; ?></p>
-    <?php if($edit_course === true){echo '<a href="./course/new.php">Add new course</a>';}?>
+<nav>
+        <div class="nav-color">
+            <div class="flex">
+                <a href="#"class="burger" href="javascript:void(0);" onclick="myFunction()"><i id="burger" class="fa-solid fa-bars fa-2x fa-fw"></i></a>
+                <a href="#"><img src="../static/images/icon2.png" alt=""></a>
+            </div>
+            <a href="#" class="sign-in">Log out</a>
+        </div>
+            <div id="navLinks">
+                <a href="#news"><i class="fas fa-home fa-2x fa-fw"></i> <p>Home</p></a>
+                <a href="#contact"><i class="fa-solid fa-atom fa-2x fa-fw"></i> <p>Subjects</p></a>
+                <a href="#"><i class="fa-solid fa-book-open fa-2x fa-fw"></i> <p>Lessons</p></a>
+                <a href="#about"><i class="fa-solid fa-gear fa-2x fa-fw"></i> <p>Settings</p></a>
+                <a href="#"><i class="fa-regular fa-face-smile fa-2x fa-fw"></i> <p>About us</p></a>
+        </div>
+        <script>
+            function myFunction() {
+                var burger = document.getElementById("burger");
+                var x = document.getElementById("navLinks");
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                    burger.className = "fa-solid fa-bars fa-2x fa-fw";
+                } else {
+                    x.style.display = "block";
+                    burger.className = "fa fa-times fa-2x fa-fw";
+                }
+            } 
+        </script>
+    </nav>
+<h1>Dashboard</h1>
+    <div class="profile">
+
+        <div class="f-row">
+            <img src="./static/images/default-avatar.png" alt="">
+            <div class="f-col">
+                <div>
+                    <h2 class="name"><?php echo $fname." ".$lname; ?></h2>
+                    <p class="type"><?php echo $type; ?></p>
+                </div>
+                <div class="bio">
+                    <hr>
+                    <p>Some description here that is long enough to test. I try to be amazing at what I do and teaching helps me afford weekly pizzas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <p>Name: <?php// echo $fname." ".$lname; ?></p>
+    <p>Type: <?php// echo $type; ?></p>
+    <p>Avatar: <img src="<?php//echo $avatar; ?>" alt=""></p>
+    <p>Bio: <?php// echo $bio; ?></p> -->
     <!--<a href="./course/view.php">View courses</a> -->
  
 <?php //Mokytojui bus matomas jo turiamų sukurtų kursų sąrašas
@@ -88,20 +134,41 @@ if($r){
         //$info_err = "There is no information";
     }
 }
+
+
+
+echo "<div class='profile'>";
+echo"<h2>My courses</h2>";
+echo"<hr>";
 while($row = mysqli_fetch_array($r)){
     $course_name = $row['course_name'];
     $course_desc = $row['course_description'];
     $course_diff = $row['course_difficulty'];
-   // echo $course_name." ".$course_desc." ".$course_diff."<br>";
+    //echo $course_name." ".$course_desc." ".$course_diff."<br>";
 
 
    //Pridėti kursų korteles, bei padaryt, kad jeigu jokių kortelių nėra, būtų rodomas tekstas "There's nothing here, start by adding new courses"
-   
-}
 
+        echo "<div class='profile'>";
+        echo"<a href='#' class='course-link'>";
+            echo"<div class='course-card'>";
+            echo"<h3>"; echo $course_name; echo"</h3>";
+                echo"<p>"; echo $course_desc;echo"</p>";
+                echo"<p>"; echo ucfirst($course_diff); echo"<p>";
+           echo"</div>";
+        echo"</a>";
+        echo"</div>";
+}
+if($edit_course=== true){
+    echo '<a href="./course/new.php">Add new course</a>';
+}
+echo"</div>";
 }
 $mysqli->close();
 ?>
-    
+<footer>
+        <p>Copyright © TeensTeaching 2023</p>
+</footer>
+
 </body>
 </html>
