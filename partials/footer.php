@@ -1,3 +1,3 @@
 <footer>
-    <p>Copyright © TeensTeaching 2023</p>
+    <p>Copyright © TeensTeaching <?php echo date('Y'); ?></p>
 </footer>

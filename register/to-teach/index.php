@@ -98,6 +98,7 @@ if (isset($_POST['form_submit'])){
                     $record = "INSERT INTO $teacher_profiles_table (teacher_id, first_name, last_name) VALUES ('$row[0]', '$fname', '$lname')";
                     if ($mysqli->query($record) === TRUE) {
                         echo "Sukurtas vartotojo profilis <br>";
+                        header("Location: ../../login/index.php?status=1");
                     } else {
                         // IF FAILED TO CREATE USER_PROFILE REMOVE RECORD FROM USER TABLE
                         $record = "DELETE FROM $teachers_table WHERE email = '$email'";
@@ -143,6 +144,7 @@ function test_input($data) {
     <title>Document</title>
 </head>
 <body>
+    <?php include '../../partials/nav.php';?>
     <h1>Register as a teacher</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     <div class="form-group">

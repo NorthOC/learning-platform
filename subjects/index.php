@@ -35,71 +35,92 @@ else{
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css">
+    <?php include '../partials/stylesheets.php'; ?>
     <title>Document</title>
 </head>
 <body>
-    <nav>
-        <div class="nav-color">
-            <div class="flex">
-                <a href="#"class="burger" href="javascript:void(0);" onclick="myFunction()"><i id="burger" class="fa-solid fa-bars fa-2x fa-fw"></i></a>
-                <a href="#"><img src="../static/images/icon2.png" alt=""></a>
-            </div>
-            <a href="#" class="sign-in">Sign in</a>
-        </div>
-            <div id="navLinks">
-                <a href="#news"><i class="fas fa-home fa-2x fa-fw"></i> <p>Home</p></a>
-                <a href="#contact"><i class="fa-solid fa-atom fa-2x fa-fw"></i> <p>Subjects</p></a>
-                <a href="#"><i class="fa-solid fa-book-open fa-2x fa-fw"></i> <p>Lessons</p></a>
-                <a href="#about"><i class="fa-solid fa-gear fa-2x fa-fw"></i> <p>Settings</p></a>
-                <a href="#"><i class="fa-regular fa-face-smile fa-2x fa-fw"></i> <p>About us</p></a>
-        </div>
-        <script>
-            function myFunction() {
-                var burger = document.getElementById("burger");
-                var x = document.getElementById("navLinks");
-                if (x.style.display === "block") {
-                    x.style.display = "none";
-                    burger.className = "fa-solid fa-bars fa-2x fa-fw";
-                } else {
-                    x.style.display = "block";
-                    burger.className = "fa fa-times fa-2x fa-fw";
-                }
-            } 
-        </script>
-    </nav>    
+    <?php include '../partials/nav.php'; ?>
     <h1>Subjects</h1>
     <div class="profile" id="courses">
     <div id="tag-cloud">
-        <p id="photography">Photography</p>
-        <p id="videography">Videography</p>
-        <p id="music">Music</p>
-        <p id="digital-art">Digital art</p>
-        <p id="drawing">Drawing</p>
-        <p id="painting">Painting</p>
-        <p id="writing">Writing</p>
-        <p id="physics">Physics</p>
-        <p id="math">Math</p>
-        <p id="biology">Biology</p>
-        <p id="programming">Programming</p>
-        <p id="chemistry">Chemistry</p>
-        <p id="engineering">Engineering</p>
-        <p id="electronics">Electronics</p>
-        <p id="medicine">Medicine</p>
-        <p id="history">History</p>
-        <p id="psychology">Psychology</p>
-        <p id="philosophy">Philosophy</p>
-        <p id="economics">Economics</p>
-        <p id="entrepreneurship">Entrepreneurship</p>
-        <p id="marketing">Marketing</p>
-        <p id="sports">Sports</p>
-        <p id="nutrition">Nutrition</p>
-        <p id="language-learning">Language learning</p>
-        <p id="social-skills">Social skills</p>
-        <p id="other">Other</p>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=biology">
+            <p id="biology">Biology</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=chemistry">
+            <p id="chemistry">Chemistry</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=digital-art">
+            <p id="digital-art">Digital art</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=drawing">
+            <p id="drawing">Drawing</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=economics">
+            <p id="economics">Economics</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=electronics">
+            <p id="electronics">Electronics</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=engineering">
+            <p id="engineering">Engineering</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=entrepreneurship">
+            <p id="entrepreneurship">Entrepreneurship</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=history">
+            <p id="history">History</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=language-learning">
+            <p id="language-learning">Language learning</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=marketing">
+            <p id="marketing">Marketing</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=math">
+            <p id="math">Math</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=medicine">
+            <p id="medicine">Medicine</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=music">
+            <p id="music">Music</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=nutrition">
+            <p id="nutrition">Nutrition</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=other">
+            <p id="other">Other</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=painting">
+            <p id="painting">Painting</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=philosophy">
+            <p id="philosophy">Philosophy</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=photography">
+            <p id="photography">Photography</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=physics">
+            <p id="physics">Physics</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=programming">
+            <p id="programming">Programming</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=psychology">
+            <p id="psychology">Psychology</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=social-skills">
+            <p id="social-skills">Social skills</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=sports">
+            <p id="sports">Sports</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=videography">
+            <p id="videography">Videography</p>
+        </a>
+        <a href="<?php echo SCRIPT_ROOT; ?>/courses?filter=writing">
+            <p id="writing">Writing</p>
+        </a>
     </div>
     <script>
         const data = <?php echo json_encode($arr); ?>;
@@ -110,13 +131,14 @@ else{
             tag.innerHTML += ` (${element[1]})`;
             tag.className = 'marked';
         });
-        tags = document.getElementById('tag-cloud');
-        for (let x of Array.from(tags.children)) {
-            if (x.className != 'marked'){
-                x.innerHTML += " (0)";
+        tags = Array.from(document.getElementById('tag-cloud').children);
+        for (let x of tags) {
+            if (x.firstElementChild.className != 'marked'){
+                x.firstElementChild.style.display = "none";
             }
         }
     </script>
     </div>
+    <?php include '../partials/footer.php'; ?>
 </body>
 </html>

@@ -50,6 +50,7 @@ nav{
 }
 #navLinks p{
     display: inline-block;
+    margin: 0.5rem auto;
 }
 
 #navLinks a:hover{
@@ -74,11 +75,13 @@ nav .flex{
     margin: 10px 5px;
 }
 .sign-in{
-    float: right;
-    margin: 23px 20px 13px 0px;
     padding: 5px 20px;
     background-color: #FFCC00;
     border-radius: 50px;
+}
+#balance, .sign-in{
+    height: fit-content;
+    margin: auto 10px;
 }
 .sign-in:hover{
     background-color: #f8d64c;
@@ -141,6 +144,7 @@ main h1 {
         margin: auto;
         width: 100%;
     }
+    
 }
 
 /* FORMS */
@@ -167,7 +171,6 @@ form{
     clip-path: circle();
     max-width: 256px;
     width: 100%;
-    margin: auto;
     z-index: 0;
 }
 .profile .f-row{
@@ -189,16 +192,33 @@ form{
 }
 .profile .course-card{
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1.2fr 0.5fr;
     align-items: center;
     justify-items: center;
 }
-.profile .course-card h3{
+.profile .course-card-student{
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr;
+    align-items: center;
+}
+.profile .course-link h3{
     width: 100%;
     font-size: 20px;
+    margin: 10px;
 }
 .profile .course-card p{
     margin: 0;
+}
+.profile .course-card .type{
+    text-align: center;
+}
+.clarifier{
+    font-size: 12px;
+}
+.new-course{
+    width: fit-content;
+    display: block;
+    margin: auto;
 }
 .course-link{
     text-decoration: none;
@@ -215,6 +235,9 @@ form{
     .profile .f-row{
         display: flex;
         flex-direction: column;
+    }
+    .profile img{
+        margin: 10px auto;
     }
 }
 
@@ -240,6 +263,10 @@ form{
 }
 #courses .rating{
     display: flex;
+    width: 100%;
+}
+.rating{
+    text-align: left;
     width: 100%;
 }
 /* FOOTER */

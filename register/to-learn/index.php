@@ -97,7 +97,7 @@ if (isset($_POST['form_submit'])){
                     $row = mysqli_fetch_row($result);
                     $record = "INSERT INTO $user_profiles_table (user_id, first_name, last_name) VALUES ('$row[0]', '$fname', '$lname')";
                     if ($mysqli->query($record) === TRUE) {
-                        header("Location: ../../login/login-student.php?status=1");
+                        header("Location: ../../login/index.php?status=1");
                     } else {
                         // IF FAILED TO CREATE USER_PROFILE REMOVE RECORD FROM USER TABLE
                         $record = "DELETE FROM $users_table WHERE email = '$email'";
@@ -136,13 +136,11 @@ function test_input($data) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/style.css">
-    <link rel="stylesheet" href="../../fontawesome/fontawesome-free-6.2.1-web/css/all.css">
-    <link rel="stylesheet" href="../../fontawesome/fontawesome-free-6.2.1-web/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <?php include '../../partials/stylesheets.php'; ?>
     <title>Document</title>
 </head>
 <body>
+    <?php include '../../partials/nav.php';?>
     <h1>Register as a learner</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     <div class="form-group">
