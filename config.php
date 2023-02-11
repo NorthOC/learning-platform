@@ -9,9 +9,9 @@
 return array(
     // db connect
     'db_host' => 'localhost',
-    'db_username' => 'root',
-    'db_password' => 'denisas12',
-    'db_database' => 'denlis14',
+    'db_username' => 'tavo_username',
+    'db_password' => 'tavo_password',
+    'db_database' => 'tavo_username',
 
     // db lenteles
     'dbt_classroom_lessons' => 'Classroom_lessons',
