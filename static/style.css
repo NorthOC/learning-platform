@@ -274,3 +274,11 @@ footer{
     margin-top: 30px;
     text-align: center;
 }
+
+/* LOGIN PAGE */
+.reg, .reg-success{
+    text-align: center;
+}
+.reg-success{
+    color: rgb(103, 155, 26);
+}

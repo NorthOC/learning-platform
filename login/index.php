@@ -105,12 +105,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css">
 </head>
 <body>
+    <?php include '../partials/nav.php' ; ?>
     <div class="wrapper">
         <h1>Login</h1>
         <?php if (!isset($_GET['status'])) {
-            echo "<p>Please fill in your credentials to login.</p>";
+            echo "<p class='reg'>Please fill in your credentials to login.</p>";
         } else {
-            echo "<p>Registration successful! You can now login using your crendentials.</p>";
+            echo "<p class='reg-success'>Registration successful! You can now login using your crendentials.</p>";
         }?>
 
         <?php 
@@ -145,5 +146,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
         </form>
     </div>
+    <?php include '../partials/footer.php'; ?>
 </body>
 </html>
