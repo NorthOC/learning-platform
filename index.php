@@ -37,6 +37,7 @@ if (isset($_SESSION['email'])){
                 <a href="./register/to-teach/">Get started!</a>
             </div>
         </div>
-    </main> 
+    </main>
+    <?php include './partials/footer.php'; ?>
 </body>
 </html>
