@@ -17,7 +17,7 @@ if (isset($_SESSION['email'])) {
         $fkey = 'teacher_id';
     }
 
-
+// O GALI ŠĮ CODE ĮDĖTI Į profile/edit.php
 
 
 
