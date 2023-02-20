@@ -84,6 +84,7 @@ if (isset($_SESSION['email'])) {
                 <div class="bio">
                     <hr>
                     <p><?php echo empty($bio); ?></p>
+                    <a href="edit-profile.php">Edit profile</a>
                 </div>
             </div>
         </div>
