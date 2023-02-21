@@ -1,6 +1,6 @@
 <?php
     $currentDirectory = getcwd();
-    $uploadDirectory = "/profile-pictures";
+    $uploadDirectory = "../profile-pictures/";
 
     $errors = []; // Store errors here
 
