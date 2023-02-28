@@ -55,31 +55,32 @@ if (isset($_SESSION['email'])) {
 </head>
 <body>
     <h1>Edit your profile</h1>
+<form action="insert.php" method="post">
+<p>
 <label for="firstName">First name</label>
-<input type="text" name="firstName" required>
-<br>
+<input type="text" name="first_name" id="firstName" required>
+</p>
+<p>
 <label for="lastName">Last name</label>
-<input type="text" name="lastName" required>
-<br>
+<input type="text" name="last_name" id="lastName" required>
+</p>
+<p>
 <label for="biography">About you</label>
-<input type="text" size="30">
+<input type="text" name="biography" id="biography" size="30">
+</p>
+<input type="submit" value="Submit">
+</form>
 <br>
 
 <p>Your photo: </p>
 <br>
 <img src="<?php echo htmlspecialchars($avatar); ?>" alt="test" />
 <br>
-<form action="fileUploadScript.php" method="post" enctype="multipart/form-data">
+<!--form action="fileUploadScript.php" method="post" enctype="multipart/form-data">
         Change your profile picture:
         <input type="file" name="the_file" id="fileToUpload">
         <input type="submit" name="submit" value="Start Upload">
-    </form>
-
-
-
-
-<a>Save changes</a>
-
+    </form-->
 
 
 
@@ -87,7 +88,7 @@ if (isset($_SESSION['email'])) {
 </html>
 
 <?php
-
+//bandau išsiųsti duomenis iš form elemento (vardas, pavarde, biografija), paspaudus submit, pradeda veikti insert.php failas, kuris turėtų pasiimti iš formos duomenis ir išsiųst į duombazę.
 
 
 ?>
