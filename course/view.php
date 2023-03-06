@@ -40,6 +40,8 @@ elseif (mysqli_num_rows($result) != 1) {
 }
 
 $course = mysqli_fetch_array($result);
+$course_lessons = json_decode($course['json_blob'], true);
+$lesson_count = count($course_lessons);
 
 // check if course can and was purchased by user
 $can_purchase = false;
@@ -87,15 +89,46 @@ function test_input($data) {
     <?php include '../partials/nav.php'; ?>
     <h1><?php echo $course['course_name']; ?></h1>
     <?php
+    echo "<p>No. of lessons: $lesson_count</p>";
+    if (is_array($course_lessons) || is_object($course_lessons)){
+      $count = 1;
+      foreach($course_lessons as $item){
+        echo "<button type='button' class='collapsible'>".$count.". ".$item['title']."</button>";
+        echo "<div class='collaps-content'>";
+        echo "<p>";
+        echo $item['desc'];
+        echo "</p>";
+        echo "</div>"; 
+        $count += 1;
+      }
+    }
     // todo normal course card
       if ($can_purchase && $was_purchased){
-        echo '<a href="../learn">Learn now!</a>';
+        echo '<a href="../learn?id='.$course_id.'">Learn now!</a>';
       }
       elseif ($can_purchase && !$was_purchased){
         $price = $course['course_price'];
-        echo "<a href='../buy'>Enroll for €$price</a>";
+        echo "<form action='./buy.php' method='post'>";
+        echo "<input type='hidden' name='course_to_purchase' value='".$course_id."' />";
+        echo "<button type='submit'>Enroll for €$price</button>";
+        echo "</form>";
       }
     ?>
     <?php include '../partials/footer.php'; ?>
+    <script>
+    var coll = document.getElementsByClassName("collapsible");
+
+    for (var i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("collaps-active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+          content.style.maxHeight = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+      });
+    }
+    </script>
 </body>
 </html>
