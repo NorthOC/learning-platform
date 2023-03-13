@@ -26,7 +26,7 @@
                 if ($nav_result) {
                     if (mysqli_num_rows($nav_result) > 0) {
                         $row = mysqli_fetch_array($nav_result);
-                        echo '<a id="balance">balance: €' . $row['credit'] . '</a>';
+                        echo '<a id="balance" href="/teensteaching/balance">balance: €' . $row['credit'] . '</a>';
                     } else {
                         die("BalanceError: loc: nav");
                     }
