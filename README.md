@@ -1,3 +1,12 @@
+# DUOMBAZĖ PAPILDYTA
+  Table: Transactions
+  id | amount | teacher_id | completed
+
+  Foreign key su Teachers table id
+
+  id užsipildo automatiškai
+  completed užsipildo automatiškai
+  daugiau informacijos denlis14.sql
 # LAMP/WAMP STACK
 
 edit config.php with necessary db connection data
