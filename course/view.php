@@ -89,7 +89,7 @@ function test_input($data) {
     <?php include '../partials/nav.php'; ?>
     <h1><?php echo $course['course_name']; ?></h1>
     <?php
-    echo "<p>No. of lessons: $lesson_count</p>";
+    echo "<p class='lesson-count'>No. of lessons: $lesson_count</p>";
     if (is_array($course_lessons) || is_object($course_lessons)){
       $count = 1;
       foreach($course_lessons as $item){
@@ -110,7 +110,7 @@ function test_input($data) {
         $price = $course['course_price'];
         echo "<form action='./buy.php' method='post'>";
         echo "<input type='hidden' name='course_to_purchase' value='".$course_id."' />";
-        echo "<button type='submit'>Enroll for €$price</button>";
+        echo "<button type='submit' class='buy-btn'>Enroll for €$price</button>";
         echo "</form>";
       }
     ?>
