@@ -41,7 +41,7 @@ elseif (mysqli_num_rows($result) != 1) {
 
 $course = mysqli_fetch_array($result);
 $course_price = $course['course_price'];
-
+$teacher_id = $course['teacher_id'];
 // check if course can and was purchased by user
 $can_purchase = false;
 $was_purchased = false;
@@ -108,6 +108,12 @@ if ($has_enough_money){
     die('Error: ' . $mysqli->connect_error);
   }
   $purchase_successful = true;
+
+  //comission to teachers
+  $comission = round($course_price*0.8, 2);
+
+  $qry = "UPDATE Teachers SET credit=credit+'$comission' WHERE id='$teacher_id'";
+  $result = $mysqli->query($qry);
 
 }
 
