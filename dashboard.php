@@ -39,9 +39,9 @@ if (isset($_SESSION['email'])) {
                 $bio = $row[5];
                 //echo "fetched";
                 if (empty($avatar)) {
-                    $avatar = './static/images/default-avatar.png';
+                    $pfp = './static/images/default-avatar.png';
                 } else {
-                    $avatar = "./static/users/$profile_id/avatar.png";
+                    $pfp = "./profile_pictures/".$avatar;
                 }
             }
         } else {
@@ -75,7 +75,7 @@ if (isset($_SESSION['email'])) {
     <h1>Dashboard</h1>
     <div class="profile">
         <div class="f-row">
-            <img src="./static/images/default-avatar.png" alt="">
+        <img src="./profile_pictures/<?php echo $avatar; ?>" alt="">
             <div class="f-col">
                 <div>
                     <h2 class="name"><?php echo $fname . " " . $lname; ?></h2>
@@ -83,7 +83,7 @@ if (isset($_SESSION['email'])) {
                 </div>
                 <div class="bio">
                     <hr>
-                    <p><?php echo empty($bio); ?></p>
+                    <p><?php echo $bio; ?></p>
                     <a href="./profile/edit.php">Edit profile</a>
                 </div>
             </div>

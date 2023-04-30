@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-//Pridėt kad galėtų keist vardą pavardę, bio, ir nuotrauką
-
 if (isset($_SESSION['email'])) {
     $config = include($_SERVER["DOCUMENT_ROOT"] . "/teensteaching/config.php");
     $id = $_SESSION['id'];
@@ -19,76 +17,101 @@ if (isset($_SESSION['email'])) {
 
     $mysqli = new mysqli($config['db_host'], $config['db_username'], $config['db_password'], $config['db_database']);
     if (!$mysqli->connect_error) {
-
         $qry = "SELECT * FROM $table WHERE $fkey='$id' LIMIT 1";
         $result = $mysqli->query($qry);
-
-        if ($result) {
+        if($result){
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_row($result);
-                $profile_id = $row[0];
-                $fname = $row[2];
-                $lname = $row[3];
                 $avatar = $row[4];
-                $bio = $row[5];
                 if (empty($avatar)) {
-                    $avatar = '../static/images/default-avatar.png';
+                    $pfp = '../static/images/default-avatar.png';
                 } else {
-                    $avatar = "../static/users/$profile_id/avatar.png";
+                    $pfp = "../profile_pictures/".$avatar;
                 }
             }
-        } else {
-            die('Error: ' . $mysqli->connect_error);
         }
+
+
+
+
+
+
+        if(isset($_POST['submit'])){
+            $firstname = $_POST['first_name'];
+            $lastname = $_POST['last_name'];
+            $bio = $_POST['bio'];
+            $sql = "UPDATE $table SET first_name='$firstname',last_name='$lastname',bio='$bio' WHERE $fkey='$id' LIMIT 1";
+            mysqli_query($mysqli,$sql);
+            } 
+
+            if($_SESSION["type"] == "student"){
+                $sql = "SELECT * FROM $table WHERE user_id =$fkey";
+                $result = mysqli_query($mysqli,$sql);
+                $row = mysqli_fetch_assoc($result);   
+            }
+            if($_SESSION["type"] == "teacher"){
+                $sql = "SELECT * FROM $table WHERE teacher_id=$fkey";
+                $result = mysqli_query($mysqli,$sql);
+                $row = mysqli_fetch_assoc($result); 
+            }
+
+        }
+    $mysqli->close();    
     }
 
     
-}
+
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css">
+    <style>
+        body{
+            background-color: #FFCC00;
+        }
+    </style>
 </head>
 <body>
-    <h1>Edit your profile</h1>
-<form action="insert.php" method="post">
+<h1>Edit your profile</h1>
+ <div class='profile'>
+<form method="post">
 <p>
-<label for="firstName">First name</label>
-<input type="text" name="first_name" id="firstName" required>
+<label for="first_name">First name</label>
+<input type="text" name="first_name" value="<?php echo $row['first_name'];?>" required>
 </p>
 <p>
-<label for="lastName">Last name</label>
-<input type="text" name="last_name" id="lastName" required>
+<label for="last_name">Last name</label>
+<input type="text" name="last_name" value="<?php echo $row['last_name'];?>" required>
 </p>
 <p>
-<label for="biography">About you</label>
-<input type="text" name="biography" id="biography" size="30">
+<label for="bio">About you</label>
+<input type="text" name="bio" value="<?php echo $row['bio'];?>" size="30">
 </p>
-<input type="submit" value="Submit">
+<p>
+<input type="submit" name="submit" value="Save information">
 </form>
+<form method="post" action= "upload.php" enctype="multipart/form-data">
+<label for="avatar">Change profile picture:</label>
+<input type="file" name="avatar" id="avatar">
+<input type="submit" name="submit" value="Submit">
+</form>
+</div>
 <br>
 
-<p>Your photo: </p>
-<br>
-<img src="<?php echo htmlspecialchars($avatar); ?>" alt="test" />
-<br>
-<!--form action="fileUploadScript.php" method="post" enctype="multipart/form-data">
-        Change your profile picture:
-        <input type="file" name="the_file" id="fileToUpload">
-        <input type="submit" name="submit" value="Start Upload">
-    </form-->
-
+<h1>Your photo: </h1>
+<img src="<?php echo htmlspecialchars($pfp); ?>" style="display: block; margin: 0 auto;" width='350' height='350'>
+<form action="../dashboard.php" method="post">
+<input type="submit" value="Grįžti atgal į meniu" style="display: block; margin: 0 auto;">
+</form>
 
 
 </body>
 </html>
-
-<?php
-//bandau išsiųsti duomenis iš form elemento (vardas, pavarde, biografija), paspaudus submit, pradeda veikti insert.php failas, kuris turėtų pasiimti iš formos duomenis ir išsiųst į duombazę.
-
-
-?>
