@@ -76,7 +76,7 @@ if($continue){
     if($db->connect_error){
         die("Connection failed: ". $db->connect_error);
     }
-    $qry = "SELECT * FROM Courses WHERE id = '$course_id'";
+    $qry = "SELECT * FROM courses WHERE id = '$course_id'";
     $result = $db->query($qry);
     if($result){
         if(!(mysqli_num_rows($result) > 0)){
@@ -87,10 +87,10 @@ if($continue){
         }
 }
 
-$sql = "UPDATE Courses SET json_blob = '$json',course_name = '$title',course_description = '$description',course_price = '$price' WHERE id = '$course_id'";
+$sql = "UPDATE courses SET json_blob = '$json',course_name = '$title',course_description = '$description',course_price = '$price' WHERE id = '$course_id'";
 if($db->query($sql) === TRUE){
     //echo "Record updated successfully";
-    $qqry = "SELECT * FROM Courses WHERE id = '$course_id'";
+    $qqry = "SELECT * FROM courses WHERE id = '$course_id'";
     $result = $db->query($qqry);
     if($result){
         if(!(mysqli_num_rows($result) > 0)){
@@ -125,7 +125,7 @@ else{
     if($db->connect_error){
         die("Connection failed: ". $db->connect_error);
     }
-    $qqry = "SELECT * FROM Courses WHERE id = '$course_id'";
+    $qqry = "SELECT * FROM courses WHERE id = '$course_id'";
     $result = $db->query($qqry);
     if($result){
         if(!(mysqli_num_rows($result) > 0)){

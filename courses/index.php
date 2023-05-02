@@ -11,12 +11,12 @@ if ($db->connect_error) {
     if (isset($_GET['filter'])) {
         $filter = test_input($_GET['filter']);
         if (!empty($filter)){
-            $qry = "SELECT * FROM Courses WHERE course_subject = '$filter'";
+            $qry = "SELECT * FROM courses WHERE course_subject = '$filter'";
         } else {
-            $qry = "SELECT * FROM Courses";
+            $qry = "SELECT * FROM courses";
         }
     } else{
-        $qry = "SELECT * FROM Courses";
+        $qry = "SELECT * FROM courses";
     }
     $result = $db->query($qry);
     if ($result) {

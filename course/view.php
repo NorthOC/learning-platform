@@ -52,7 +52,7 @@ if ($user_type == 'student'){
 }
 
 if ($can_purchase){
-  $qry = "SELECT id FROM Purchased_courses WHERE course_id = '$course_id' AND user_id = '$user_id' LIMIT 1";
+  $qry = "SELECT id FROM purchased_courses WHERE course_id = '$course_id' AND user_id = '$user_id' LIMIT 1";
 
   $result = $mysqli->query($qry);
 

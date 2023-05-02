@@ -47,7 +47,7 @@ if (!$was_purchased){
   die();
 }
 
-$qry = "SELECT * FROM Courses WHERE id='$course_id' LIMIT 1";
+$qry = "SELECT * FROM courses WHERE id='$course_id' LIMIT 1";
 
 if ($mysqli->connect_error) {
   die("Connection error: " . $mysqli->connect_error);

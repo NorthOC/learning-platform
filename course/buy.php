@@ -24,7 +24,7 @@ $config = include($_SERVER["DOCUMENT_ROOT"] . "/teensteaching/config.php");
 
 //db connection
 $mysqli = new mysqli($config['db_host'], $config['db_username'], $config['db_password'], $config['db_database']);
-$qry = "SELECT * FROM Courses WHERE id='$course_id' LIMIT 1";
+$qry = "SELECT * FROM courses WHERE id='$course_id' LIMIT 1";
 
 if ($mysqli->connect_error) {
   die("Connection error: " . $mysqli->connect_error);
@@ -54,7 +54,7 @@ if (!$can_purchase){
   die('Error: Only student accounts are allowed to purchase courses.');
 }
 
-$qry = "SELECT id FROM Purchased_courses WHERE course_id='$course_id' AND user_id='$user_id' LIMIT 1";
+$qry = "SELECT id FROM purchased_courses WHERE course_id='$course_id' AND user_id='$user_id' LIMIT 1";
 
 $result = $mysqli->query($qry);
 
@@ -71,7 +71,7 @@ if ($was_purchased){
   die();
 }
 
-$qry = "SELECT credit FROM Users WHERE id='$user_id' LIMIT 1";
+$qry = "SELECT credit FROM users WHERE id='$user_id' LIMIT 1";
 $result = $mysqli->query($qry);
 
 if (!$result) {
@@ -94,14 +94,14 @@ if ($credit_after_purchase >= 0){
 }
 
 if ($has_enough_money){
-  $qry = "INSERT INTO Purchased_courses (course_id, user_id) VALUES ('$course_id', '$user_id')";
+  $qry = "INSERT INTO purchased_courses (course_id, user_id) VALUES ('$course_id', '$user_id')";
   $result = $mysqli->query($qry);
 
   if (!$result) {
     die('Error: ' . $mysqli->connect_error);
   }
 
-  $qry = "UPDATE Users SET credit='$credit_after_purchase' WHERE id='$user_id'";
+  $qry = "UPDATE users SET credit='$credit_after_purchase' WHERE id='$user_id'";
   $result = $mysqli->query($qry);
 
   if (!$result) {
@@ -112,7 +112,7 @@ if ($has_enough_money){
   //comission to teachers
   $comission = round($course_price*0.8, 2);
 
-  $qry = "UPDATE Teachers SET credit=credit+'$comission' WHERE id='$teacher_id'";
+  $qry = "UPDATE teachers SET credit=credit+'$comission' WHERE id='$teacher_id'";
   $result = $mysqli->query($qry);
 
 }

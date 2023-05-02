@@ -11,7 +11,7 @@ if($db->connect_error){
     die();
 }
 else{
-    $query = "SELECT course_subject, COUNT(*) as count FROM `Courses` GROUP BY course_subject ORDER BY course_subject ASC";
+    $query = "SELECT course_subject, COUNT(*) as count FROM `courses` GROUP BY course_subject ORDER BY course_subject ASC";
     $result = $db->query($query);
     if($result){
         $arr = [];

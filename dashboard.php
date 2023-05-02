@@ -75,7 +75,7 @@ if (isset($_SESSION['email'])) {
     <h1>Dashboard</h1>
     <div class="profile">
         <div class="f-row">
-        <img src="./profile_pictures/<?php echo $avatar; ?>" alt="">
+        <img src="./profile_pictures/<?php echo $pfp; ?>" alt="">
             <div class="f-col">
                 <div>
                     <h2 class="name"><?php echo $fname . " " . $lname; ?></h2>
@@ -92,7 +92,7 @@ if (isset($_SESSION['email'])) {
 
     <?php //Mokytojui bus matomas jo turiamų sukurtų kursų sąrašas
     if ($_SESSION['type'] == 'teacher') {
-        $qqry = "SELECT id, course_difficulty, course_name, course_price, course_type FROM Courses WHERE teacher_id='$id'";
+        $qqry = "SELECT id, course_difficulty, course_name, course_price, course_type FROM courses WHERE teacher_id='$id'";
         $r = $mysqli->query($qqry);
         if ($r) {
             if (!(mysqli_num_rows($r) > 0)) {
@@ -129,7 +129,7 @@ if (isset($_SESSION['email'])) {
         }
         // studentui tas pats
     } else {
-        $qqry = "SELECT course_id FROM Purchased_courses WHERE user_id='$id'";
+        $qqry = "SELECT course_id FROM purchased_courses WHERE user_id='$id'";
         $r = $mysqli->query($qqry);
         if ($r) {
             echo "<div class='profile'>";
@@ -141,7 +141,7 @@ if (isset($_SESSION['email'])) {
             } else {
                 while ($row = mysqli_fetch_array($r)) {
                     $course_id = $row['course_id'];
-                    $qqry = "SELECT id, course_name, course_type, course_subject FROM Courses WHERE id='$course_id' LIMIT 1";
+                    $qqry = "SELECT id, course_name, course_type, course_subject FROM courses WHERE id='$course_id' LIMIT 1";
                     $result = $mysqli->query($qqry);
                     if ($result) {
                         if (!(mysqli_num_rows($result) > 0)) {
